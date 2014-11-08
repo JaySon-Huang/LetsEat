@@ -23,5 +23,6 @@ urlpatterns += patterns('shop.views',
 urlpatterns += patterns('customer.views',
 	url(r'^customer/signup/$','signup'),
 	url(r'^customer/login/$','login'),
+    url(r'^customer/logout/$','logout'),
 	url(r'^customer/profile/$','profile'),
 )
