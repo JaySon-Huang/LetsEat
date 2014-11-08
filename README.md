@@ -1,5 +1,19 @@
 网上订餐管理系统
 ===
+## 环境
+python 2.7 [Python官网](https://www.python.org/)  
+Django 1.6.5 [Django官网](https://www.djangoproject.com/)  
+
+## 运行
+* 类Unix环境
+./manage.py runserver
+然后在浏览器打开`http://localhost:8000`
+* Windows
+配置好python的环境变量后，使用`启动服务器.bat`  
+或者使用cmd命令行进入目录下运行`python manage.py runserver`
+
+然后在浏览器打开`http://localhost:8000`
+
 ## 框架
 使用Django框架开发,数据库使用MySQL。
 
