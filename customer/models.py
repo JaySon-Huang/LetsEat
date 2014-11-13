@@ -4,24 +4,21 @@ from django.db import models
 from shop.models import ShopKeeperModel, ShopModel, CuisineModel
 
 class CustomerModel(models.Model):
-        id=models.IntegerField()
+	'''顾客'''
 	name = models.CharField(max_length=20)
-        address = models.CharField(max_length=50)
-        phone = models.CharField(max_length=50)
-        account = models.CharField(max_length=15)
-        password = models.CharField(max_length=15)
+	address = models.CharField(max_length=50)
+	phone = models.CharField(max_length=50)
+	account = models.CharField(max_length=15)
+	password = models.CharField(max_length=15)
         
-	pass
 
 class OrderModel(models.Model):
-        id=models.IntegerField()
+	'''订单'''
 	time = models.DateTimeField()
-        status = models.CharField(max_length=5)
+	status = models.CharField(max_length=5)
 	
-	pass
 
 class CommentModel(models.Model):
-	id=models.IntegerField()
+	'''评论'''
 	grade = models.FloatField()
-        message = models.CharField(max_length=200)
-	pass
+	message = models.CharField(max_length=200)
