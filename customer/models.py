@@ -8,6 +8,7 @@ class CustomerModel(models.Model):
 	name = models.CharField(max_length=20)
 	address = models.CharField(max_length=50)
 	phone = models.CharField(max_length=50)
+	alternatephone=moedls.CharField(max_length=50,blank=True)
 	account = models.CharField(max_length=15)
 	password = models.CharField(max_length=15)
     
