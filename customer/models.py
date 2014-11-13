@@ -10,7 +10,7 @@ class CustomerModel(models.Model):
 	phone = models.CharField(max_length=50)
 	account = models.CharField(max_length=15)
 	password = models.CharField(max_length=15)
-        
+    
 
 class OrderModel(models.Model):
 	'''订单'''
