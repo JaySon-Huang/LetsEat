@@ -8,7 +8,6 @@ class ShopKeeperModel(models.Model):
 	address = models.CharField(max_length=50)
 	account = models.CharField(max_length=15)
 	password = models.CharField(max_length=15)
-	shop = models.OneToOneField(ShopModel,related_name = "shopkeeper_shop")
 
 class ShopModel(models.Model):
 	'''店铺'''
@@ -19,6 +18,7 @@ class ShopModel(models.Model):
 	miniprice = models.FloatField()
 	announcement = models.CharField(max_length=200)
 	status = models.CharField(max_length=5)
+	shop = models.OneToOneField(ShopModel,related_name = "shop_shopkeeper")
 
 class CuisineModel(models.Model):
 	'''菜式'''

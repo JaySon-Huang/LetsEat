@@ -44,5 +44,5 @@ class CommentModel(models.Model):
 
 	grade = models.FloatField(choices=GRADE_OF_CUISINE_CHOICES)
 	message = models.CharField(max_length=200)
-	cuisine = models.ForeignKey(CuisineModel,related_name = "comment_cuisine")
+	cuisine = models.OneToOneField(CuisineModel,related_name = "comment_cuisine")
 	customer = models.OneToOneField(CustomerModel,related_name = "comment_customer")
