@@ -16,6 +16,7 @@ class ShopModel(models.Model):
 	miniprice = models.FloatField()
 	announcement = models.CharField(max_length=200)
 	status = models.CharField(max_length=5)
+	shop = models.OneToOneField(ShopModel,related_name = "shop_shopkeeper")
 
 class CuisineModel(models.Model):
 	'''菜式'''
@@ -23,3 +24,4 @@ class CuisineModel(models.Model):
 	price = models.FloatField()
 	grade = models.FloatField()
 	salesvolume = models.PositiveSmallIntegerField()
+	shop = models.ForeignKey(ShopKeeperModel,related_name = "cuisine_shop")
