@@ -8,6 +8,7 @@ class ShopKeeperModel(models.Model):
 	address = models.CharField(max_length=50)
 	account = models.CharField(max_length=15)
 	password = models.CharField(max_length=15)
+	shop = models.OneToOneField(ShopModel,related_name = "shopkeeper_shop")
 
 class ShopModel(models.Model):
 	'''店铺'''
@@ -25,3 +26,4 @@ class CuisineModel(models.Model):
 	price = models.FloatField()
 	grade = models.FloatField()
 	salesvolume = models.PositiveSmallIntegerField()
+	shop = models.ForeignKey(ShopKeeperModel,related_name = "cuisine_shop")
