@@ -1,6 +1,5 @@
 from django.contrib import admin
-from LetsEat.customer.models import CustomerModel,OrderModel,CommentModel
-# Register your models here.
+from models import CustomerModel,OrderModel,CommentModel
 
 class CustomerModelAdmin(admin.ModelAdmin):
     list_display=('name','address','phone','alternatephone')

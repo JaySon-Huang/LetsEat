@@ -8,7 +8,7 @@ class CustomerModel(models.Model):
 	name = models.CharField(max_length=20)
 	address = models.CharField(max_length=50)
 	phone = models.CharField(max_length=50)
-	alternatephone=moedls.CharField(max_length=50,blank=True)
+	alternatephone = models.CharField(max_length=50,blank=True)
 	account = models.CharField(max_length=15)
 	password = models.CharField(max_length=15)
     
@@ -17,14 +17,14 @@ class OrderModel(models.Model):
 	'''订单'''
 
 	# 订单的不同状态
-	STATUS_OF_ORDER_CHOICES(
+	STATUS_OF_ORDER_CHOICES = (
 		(1,'已下单'),
 		(2,'餐厅已确认'),
 		(3,'成功交易'),
 	)
 
 	time = models.DateTimeField()
-	status = models.IntegerField(max_length=5)
+	status = models.IntegerField(choices=STATUS_OF_ORDER_CHOICES)
 	shop = models.ForeignKey(ShopKeeperModel,related_name = "order_shop")
 	cusine = models.ManyToManyField(CuisineModel,related_name = "order_cuisine")
 	customer = models.ForeignKey(CustomerModel,related_name = "order_customer")
