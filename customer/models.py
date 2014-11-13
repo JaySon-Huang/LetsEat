@@ -16,9 +16,14 @@ class OrderModel(models.Model):
 	'''订单'''
 	time = models.DateTimeField()
 	status = models.CharField(max_length=5)
+	shop = models.ForeignKey(ShopKeeperModel,related_name = "order_shop")
+	cusine = models.ManyToManyField(CuisineModel,related_name = "order_cuisine")
+	customer = models.ForeignKey(CustomerModel,related_name = "order_customer")
 	
 
 class CommentModel(models.Model):
 	'''评论'''
 	grade = models.FloatField()
 	message = models.CharField(max_length=200)
+	cuisine = models.ForeignKey(CuisineModel,related_name = "comment_cuisine")
+	customer = models.OneToOneField(CustomerModel,related_name = "comment_customer")
