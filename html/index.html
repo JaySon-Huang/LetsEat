@@ -5,8 +5,12 @@
 
 {% block body %}
 <h1>饱了么</h1>
-<a href='/customer/signup/'>新用户注册</a>
-<a href='/customer/login/'>登录</a>
-<a href='/customer/profile'>个人信息</a>
-<a href='/customer/logout'>退出登录</a>
+<div id="shop">
+<ul>
+   <li class="current_page_item"><p><a href='/customer/signup/'>新用户注册</a></p></li>
+   <li class="current_page_item"><p><a href='/customer/login/'>登录</a></p></li>
+   <li class="current_page_item"><p><a href='/customer/profile'>个人信息</a></p></li>
+   <li class="current_page_item"><p><a href='/customer/logout'>退出登录</a></p></li>
+</ul>
+</div>
 {% endblock %}
