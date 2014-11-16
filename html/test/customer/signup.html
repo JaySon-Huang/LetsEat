@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}用户注册{% endblock %}
+
+{% block body %}
+<h1>用户注册</h1>
+<form method='POST' action='.' >
+  <table>
+  	{{ form.as_table }}
+  </table>
+  {% csrf_token %}
+  <input type='submit' value='注册' />
+</form>
+{% endblock %}

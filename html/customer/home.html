@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}用户登录{% endblock %}
+
+{% block body %}
+<h1>用户登录</h1>
+{{ session }}
+<form method='POST' action='.' >
+  <table>
+  	{{ form.as_table }}
+  </table>
+  {% csrf_token %}
+  <input type='submit' value='登录' />
+</form>
+{% endblock %}
