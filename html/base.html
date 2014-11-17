@@ -2,9 +2,13 @@
 <!DOCTYPE HTML>
 <html lang="zh-CN">
   <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   	<meta charset="utf-8">
+    <meta name="description" content="">
+    <title>{% block title %}{% endblock %}</title>
+
     <!-- 新 Bootstrap 核心 CSS 文件 -->
-    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
@@ -12,10 +16,11 @@
     <!-- Bootstrap 是移动设备优先的。为了确保适当的绘制和触屏缩放 -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- 自定义样式表 -->
-    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/style.css' %}"/>
+    <link rel="icon" href="{% static 'pictures/favor.ico' %}">
 
-    <title>{% block title %}{% endblock %}</title>
+    <!-- 自定义样式表 -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/offcanvas.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/>
   </head>
   <body>
     <!-- Static navbar -->
@@ -47,6 +52,8 @@
         </div><!--/.nav-collapse -->
       </div>
     </nav><!-- 导航栏结束 -->
+    <div class="container">
   	{% block body %}{% endblock %}
+    </div>
   </body>
 </html>
