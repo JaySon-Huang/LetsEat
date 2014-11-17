@@ -11,7 +11,9 @@ class CustomerModel(models.Model):
 	alternatephone = models.CharField(max_length=50,blank=True)
 	account = models.CharField(max_length=15)
 	password = models.CharField(max_length=15)
-    
+
+	def __unicode__(self):
+		return self.name
 
 class OrderModel(models.Model):
 	'''订单'''
@@ -29,6 +31,8 @@ class OrderModel(models.Model):
 	cusine = models.ManyToManyField(CuisineModel,related_name = "order_cuisine")
 	customer = models.ForeignKey(CustomerModel,related_name = "order_customer")
 	
+	def __unicode__(self):
+		return self.id
 
 class CommentModel(models.Model):
 	'''评论'''
@@ -47,3 +51,6 @@ class CommentModel(models.Model):
 	message = models.CharField(max_length=200)
 	cuisine = models.OneToOneField(CuisineModel,related_name = "comment_cuisine")
 	customer = models.OneToOneField(CustomerModel,related_name = "comment_customer")
+
+	def __unicode__(self):
+		return '%s:%f'%(self.cuisine,self.grade)

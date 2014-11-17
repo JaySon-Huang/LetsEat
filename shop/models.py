@@ -8,6 +8,9 @@ class ShopKeeperModel(models.Model):
 	account = models.CharField(max_length=15)
 	password = models.CharField(max_length=15)
 
+	def __unicode__(self):
+		return u'店长'
+
 class ShopModel(models.Model):
 	'''店铺'''
 	name = models.CharField(max_length=20)
@@ -18,6 +21,9 @@ class ShopModel(models.Model):
 	status = models.CharField(max_length=5)
 	shopkeeper = models.OneToOneField(ShopKeeperModel,related_name = "shop_shopkeeper")
 
+	def __unicode__(self):
+		return u'店铺'
+
 class CuisineModel(models.Model):
 	'''菜式'''
 	name = models.CharField(max_length=20)
@@ -25,3 +31,7 @@ class CuisineModel(models.Model):
 	grade = models.FloatField()
 	salesvolume = models.PositiveSmallIntegerField()
 	shop = models.ForeignKey(ShopModel,related_name = "cuisine_shop")
+
+	def __unicode__(self):
+		return u'菜式'
+
