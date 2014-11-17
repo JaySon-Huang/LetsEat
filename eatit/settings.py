@@ -1,3 +1,4 @@
+#encoding=utf-8
 """
 Django settings for eatit project.
 
@@ -57,11 +58,25 @@ WSGI_APPLICATION = 'eatit.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
-
+# 个人隐私信息
+from passwd import (
+    MYSQL_USER,
+    MYSQL_PASS,
+)
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # }
+
+    # 使用MySQL数据库
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'letseat',
+        'USER': MYSQL_USER,
+        'PASSWORD': MYSQL_PASS,
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
