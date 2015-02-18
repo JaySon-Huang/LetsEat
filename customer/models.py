@@ -5,12 +5,12 @@ from shop.models import ShopKeeperModel, ShopModel, CuisineModel
 
 class CustomerModel(models.Model):
 	'''顾客'''
-	name = models.CharField(max_length=20)
-	address = models.CharField(max_length=50)
-	phone = models.CharField(max_length=50)
-	alternatephone = models.CharField(max_length=50,blank=True)
-	account = models.CharField(max_length=15)
-	password = models.CharField(max_length=15)
+	name = models.CharField(verbose_name='昵称',max_length=20)
+	address = models.CharField(verbose_name='地址',max_length=50)
+	phone = models.CharField(verbose_name='电话',max_length=50)
+	alternatephone = models.CharField(verbose_name='电话2',max_length=50,blank=True)
+	account = models.CharField(verbose_name='账号',max_length=15)
+	password = models.CharField(verbose_name='密码',max_length=15)
 
 	def __unicode__(self):
 		return self.name
@@ -25,14 +25,14 @@ class OrderModel(models.Model):
 		(3,'成功交易'),
 	)
 
-	time = models.DateTimeField()
-	status = models.IntegerField(choices=STATUS_OF_ORDER_CHOICES)
-	shop = models.ForeignKey(ShopKeeperModel,related_name = "order_shop")
-	cusine = models.ManyToManyField(CuisineModel,related_name = "order_cuisine")
-	customer = models.ForeignKey(CustomerModel,related_name = "order_customer")
+	time = models.DateTimeField(verbose_name='下单时间')
+	status = models.IntegerField(verbose_name='状态',choices=STATUS_OF_ORDER_CHOICES)
+	shop = models.ForeignKey(ShopModel,related_name = "order_shop",verbose_name='店铺')
+	cusine = models.ManyToManyField(CuisineModel,related_name = "order_cuisine",verbose_name='菜式')
+	customer = models.ForeignKey(CustomerModel,related_name = "order_customer",verbose_name='顾客')
 	
 	def __unicode__(self):
-		return self.id
+		return unicode(self.id)
 
 class CommentModel(models.Model):
 	'''评论'''
@@ -47,10 +47,10 @@ class CommentModel(models.Model):
 		(5.0,'5.0'),
 	)
 
-	grade = models.FloatField(choices=GRADE_OF_CUISINE_CHOICES)
-	message = models.CharField(max_length=200)
-	cuisine = models.OneToOneField(CuisineModel,related_name = "comment_cuisine")
-	customer = models.OneToOneField(CustomerModel,related_name = "comment_customer")
+	customer = models.OneToOneField(CustomerModel,related_name = "comment_customer",verbose_name='顾客')
+	cuisine = models.OneToOneField(CuisineModel,related_name = "comment_cuisine",verbose_name='菜式')
+	grade = models.FloatField(verbose_name='评分',choices=GRADE_OF_CUISINE_CHOICES,default=3.0)
+	message = models.CharField(verbose_name='留言',max_length=200,default='我的最爱')
 
 	def __unicode__(self):
-		return '%s:%f'%(self.cuisine,self.grade)
+		return '%s:%f'%(self.cuisine.__unicode__(),self.grade)

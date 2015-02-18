@@ -13,8 +13,8 @@ class SignupForm(forms.Form):
 		help_text='最长20字符')
 	password = forms.CharField(
 		label='密码',widget=forms.PasswordInput(),
-		min_length=6,
-		help_text='至少6位长')
+		min_length=3,
+		help_text='至少3位长')
 	phone = forms.CharField(label='手机号码')
 	ex_phone = forms.CharField(label='备用手机号', required=False, help_text='可选')
 	address = forms.CharField(label='送餐地址')
@@ -33,8 +33,8 @@ class LoginForm(forms.Form):
 		help_text='最长20字符,只能用大小写英文字母或数字')
 	password = forms.CharField(
 		label='密码',widget=forms.PasswordInput(),
-		min_length=6,
-		help_text='至少6位长')
+		min_length=3,
+		help_text='至少3位长')
 
 	def clean_account(self):
 		account = self.cleaned_data['account']

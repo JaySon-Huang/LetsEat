@@ -23,6 +23,19 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/>
   </head>
   <body>
+<script>
+function clearCart(elem){
+  $.ajax({
+    type:'GET',
+    url:'/cart/clear/',
+    success:function(data){
+      data = JSON.parse(data);
+      console.log(data['size']);
+      $('#cart_sz').text(data['size']);
+    },
+  })
+}
+</script>
     <!-- Static navbar -->
     <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
       <div class="container">
@@ -33,21 +46,31 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">饱了么网上订餐系统</a>
+          <a class="navbar-brand" href="/">饱了么网上订餐系统</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <li class="active"><a href="/">查看餐厅</a></li>
-            <li><a href='/customer/signup/'>新用户注册</a></li>
-            <li><a href='/customer/login/'>登录</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">用户昵称{{ username }}<span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="/customer/profile">个人信息</a></li>
-                <li class="divider"></li>
-                <li><a href='/customer/logout'>退出登录</a></li>
-              </ul>
-            </li>
+{% if not session.isLogin %}
+<li><a href='/customer/signup/'>新用户注册</a></li>
+<li><a href='/customer/login/'>登录</a></li>
+{% else %}
+<li class="dropdown">
+  <a href='#' class="dropdown-toggle" data-toggle="dropdown">购物车(<span id='cart_sz'>{{ session.cart.size }}</span>)<span class="caret"></span></a>
+  <ul class="dropdown-menu" role="menu">
+    <li><a href="/cart/view">订单详情</a></li>
+    <li><a href="javascript:void(0);" onclick="clearCart(this)">清空购物车</a></li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ session.nickname }}<span class="caret"></span></a>
+  <ul class="dropdown-menu" role="menu">
+    <li><a href="/customer/profile">个人信息</a></li>
+    <li class="divider"></li>
+    <li><a href='/customer/logout'>退出登录</a></li>
+  </ul>
+</li>
+{% endif %}
           </ul>
         </div><!--/.nav-collapse -->
       </div>

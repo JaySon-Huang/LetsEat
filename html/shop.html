@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}店铺:{{shop.name}} - 饱了么{% endblock %}
+
+{% block body %}
+<script>
+function add2cart(elem){
+  $.ajax({
+    type:'GET',
+    url:'/cart/add/'+elem.id+'/',
+    success:function(data){
+      data = JSON.parse(data);
+      console.log(data['size']);
+      $('#cart_sz').text(data['size']);
+    },
+  })
+}
+</script>
+
+<div class="row row-offcanvas row-offcanvas-right">
+  <div class="col-xs-12 col-sm-12">
+    <div class="jumbotron">
+      <h4>欢迎使用饱了么网上订餐系统</h4>
+      <h3>当前正在浏览店铺：<strong>{{shop.name}}</strong></h3>
+      <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--“{{shop.announcement}}”</h4>
+      <h4>营业状态:{{shop.status}}&nbsp;&nbsp;&nbsp;店铺类型:{{shop.shoptype}}</h4>
+      <h4>地址:{{shop.address}}</h4>
+      <h4>起送价:{{shop.miniprice}} 元</h4>
+    </div>
+    <div class="row">
+{% for cuisine in cuisines %}
+<div class="col-xs-6 col-lg-4 shop">
+  <div class="thumbnails shop_icon">
+    <img class="img-polaroid" src="{% static 'pictures/picture.jpeg' %}" alt="店铺名称" />
+  </div>
+  <div class="shop_desc">
+    <h4><a id='{{cuisine.id}}' class='add_cuisine' onclick='add2cart(this);'>{{cuisine.name}}</a></h4>
+    <p>价格: {{cuisine.price}} 元</p>
+    <p>评分: {{cuisine.grade}}&nbsp;&nbsp;&nbsp;销量: {{cuisine.salesvolume}} 份</p>
+  </div>
+</div><!-- 一份菜式 -->
+{% endfor %}
+    </div><!--/row-->
+  </div><!--/.col-xs-12.col-sm-9-->
+</div><!--/row-->
+{% endblock %}

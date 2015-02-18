@@ -64,6 +64,7 @@ from passwd import (
     MYSQL_PASS,
 )
 DATABASES = {
+    # 使用sqlite3
     # 'default': {
     #     'ENGINE': 'django.db.backends.sqlite3',
     #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),

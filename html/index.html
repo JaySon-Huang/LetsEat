@@ -12,94 +12,19 @@
         <h3>欢迎使用饱了么网上订餐系统</h3>
       </div>
       <div class="row">
-        <div class="col-xs-6 col-lg-3 shop">
-          <div class="thumbnails shop_icon">
-            <img class="img-polaroid" src="{% static 'pictures/picture.jpeg' %}" alt="店铺名称" />
-          </div>
-          <div class="shop_desc">
-            <h4>店铺名称</h4>
-            <p>店铺类型</p>
-            <p>起送价</p>
-            <p>订单量</p>
-          </div>
-        </div><!-- 一间店铺 -->
-        <div class="col-xs-6 col-lg-3 shop">
-          <div class="thumbnails shop_icon">
-            <img class="img-polaroid" src="{% static 'pictures/picture.jpeg' %}" alt="店铺名称" />
-          </div>
-          <div class="shop_desc">
-            <h4>店铺名称</h4>
-            <p>店铺类型</p>
-            <p>起送价</p>
-            <p>订单量</p>
-          </div>
-        </div><!-- 一间店铺 -->
-        <div class="col-xs-6 col-lg-3 shop">
-          <div class="thumbnails shop_icon">
-            <img class="img-polaroid" src="{% static 'pictures/picture.jpeg' %}" alt="店铺名称" />
-          </div>
-          <div class="shop_desc">
-            <h4>店铺名称</h4>
-            <p>店铺类型</p>
-            <p>起送价</p>
-            <p>订单量</p>
-          </div>
-        </div><!-- 一间店铺 -->
-        <div class="col-xs-6 col-lg-3 shop">
-          <div class="thumbnails shop_icon">
-            <img class="img-polaroid" src="{% static 'pictures/picture.jpeg' %}" alt="店铺名称" />
-          </div>
-          <div class="shop_desc">
-            <h4>店铺名称</h4>
-            <p>店铺类型</p>
-            <p>起送价</p>
-            <p>订单量</p>
-          </div>
-        </div><!-- 一间店铺 -->
-        <div class="col-xs-6 col-lg-3 shop">
-          <div class="thumbnails shop_icon">
-            <img class="img-polaroid" src="{% static 'pictures/picture.jpeg' %}" alt="店铺名称" />
-          </div>
-          <div class="shop_desc">
-            <h4>店铺名称</h4>
-            <p>店铺类型</p>
-            <p>起送价</p>
-            <p>订单量</p>
-          </div>
-        </div><!-- 一间店铺 -->
-        <div class="col-xs-6 col-lg-3 shop">
-          <div class="thumbnails shop_icon">
-            <img class="img-polaroid" src="{% static 'pictures/picture.jpeg' %}" alt="店铺名称" />
-          </div>
-          <div class="shop_desc">
-            <h4>店铺名称</h4>
-            <p>店铺类型</p>
-            <p>起送价</p>
-            <p>订单量</p>
-          </div>
-        </div><!-- 一间店铺 -->
-        <div class="col-xs-6 col-lg-3 shop">
-          <div class="thumbnails shop_icon">
-            <img class="img-polaroid" src="{% static 'pictures/picture.jpeg' %}" alt="店铺名称" />
-          </div>
-          <div class="shop_desc">
-            <h4>店铺名称</h4>
-            <p>店铺类型</p>
-            <p>起送价</p>
-            <p>订单量</p>
-          </div>
-        </div><!-- 一间店铺 -->
-        <div class="col-xs-6 col-lg-3 shop">
-          <div class="thumbnails shop_icon">
-            <img class="img-polaroid" src="{% static 'pictures/picture.jpeg' %}" alt="店铺名称" />
-          </div>
-          <div class="shop_desc">
-            <h4>店铺名称</h4>
-            <p>店铺类型</p>
-            <p>起送价</p>
-            <p>订单量</p>
-          </div>
-        </div><!-- 一间店铺 -->
+{% for shop in shops %}
+<div class="col-xs-6 col-lg-3 shop">
+  <div class="thumbnails shop_icon">
+    <img class="img-polaroid" src="{% static 'pictures/picture.jpeg' %}" alt="店铺名称" />
+  </div>
+  <div class="shop_desc">
+    <h4><a href='/shop/{{shop.id}}'>{{shop.name}}</a></h4>
+    <p>{{shop.shoptype}}</p>
+    <p>起送价: {{shop.miniprice}} 元</p>
+    <p>订单量: {{0}}</p>
+  </div>
+</div><!-- 一间店铺 -->
+{% endfor %}
       </div><!--/row-->
     </div><!--/.col-xs-12.col-sm-9-->
   </div><!--/row-->

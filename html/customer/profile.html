@@ -5,7 +5,33 @@
 
 {% block body %}
 <h1>个人信息</h1>
-{{ userinfo }}
+<table>
+  <tr>
+    <td>昵称</td><td>{{userinfo.nickname}}</td>
+  </tr>
+  <tr>
+    <td>账号</td><td>{{userinfo.account}}</td>
+  </tr>
+  <tr>
+    <td>地址</td><td>{{userinfo.address}}</td>
+  </tr>
+  <tr>
+    <td>联系电话</td><td>{{userinfo.phone}}</td>
+  </tr>
+  <tr>
+    <td>电话(可选)</td><td>{{userinfo.ex_phone}}</td>
+  </tr>
+</table>
+<hr/>
+<h2>我的订单:</h2>
 <br />
-往期订单:
+{% for order in userinfo.orders %}
+  订单状态:{{order.status}}&nbsp;&nbsp;&nbsp;<a href='/shop/{{order.shop.id}}'>店铺:{{order.shop.name}}</a>&nbsp;&nbsp;&nbsp;订单日期:{{order.time}}<br />
+  订单内容:<br />
+  {% for cusine in order.cusines %}
+    {{cusine.name}} -- {{cusine.price}}元
+    <br />
+  {% endfor %}
+  <hr />
+{% endfor %}
 {% endblock %}

@@ -17,12 +17,21 @@ urlpatterns = patterns('',
 urlpatterns += patterns('shop.views',
 	# 首页
     url(r'^$', 'index'),
+    # 浏览店铺菜式
+    url(r'^shop/(\d+)/$','viewShop'),
+
 )
 
 # 处理顾客登录、修改个人资料等界面URL对应的view
 urlpatterns += patterns('customer.views',
-	url(r'^customer/signup/$','signup'),
-	url(r'^customer/login/$','login'),
+    url(r'^customer/signup/$','signup'),
+    url(r'^customer/login/$','login'),
     url(r'^customer/logout/$','logout'),
-	url(r'^customer/profile/$','profile'),
+    url(r'^customer/profile/$','profile'),
+)
+
+urlpatterns += patterns('customer.views',
+    url(r'^cart/add/(?P<cuisineID>[^/]+)/$','add2Cart'),
+    url(r'^cart/view/$','getCart'),
+    url(r'^cart/clear/$','clearCart'),
 )
