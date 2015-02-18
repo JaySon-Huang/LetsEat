@@ -186,3 +186,5 @@ def clearCart(request):
 	request.session['cart'] = Cart()
 	return HttpResponse(json.dumps({'size':0}))
 
+# TODO:购物车->下单
+# TODO:javascript进行排序
