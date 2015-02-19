@@ -184,9 +184,9 @@ def getCart(request):
 	cuisines = []
 	for cuisineID, num in request.session['cart'].items.items():
 		cuisine = CuisineModel.objects.get(id=cuisineID)
-		totalCost += cuisine.price
+		totalCost += cuisine.price*num
 		cuisines.append((cuisine, num))
-	print 
+	print cuisines
 	return render_to_response(
 		'cart.html',
 		{
@@ -200,6 +200,12 @@ def getCart(request):
 def clearCart(request):
 	request.session['cart'] = Cart()
 	return HttpResponse(json.dumps({'size':0}))
+
+def confirmCart(request):
+	
+	request.session['cart'] = Cart()
+	length = request.session['cart'].size
+	return HttpResponse(json.dumps({'size':length}))
 
 # TODO:购物车->下单
 # TODO:javascript进行排序

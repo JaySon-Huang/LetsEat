@@ -6,12 +6,40 @@
 {% block body %}
 <h2>购物车:</h2>
 <br />
-{% for cuisine in cuisines %}
-  {% for cusine,num in order.cusines %}
-    {{cusine.name}}x{{num}} -- {{cusine.price}}元
-    <br />
-  {% endfor %}
+<table border='1'>
+<tr>
+  <th>点餐</th><th>单价</th><th>数量</th>
+</tr>
+{% for cuisine,num in cuisines %}
+<tr>
+  <td><a href='/shop/{{cuisine.shop.id}}/'>{{cuisine.name}}</a></td>
+  <td>{{cuisine.price}}</td>
+  <td>{{num}}</td><!-- {% widthratio cuisine.price 1 num %}元-->
+</tr>
 {% endfor %}
+</table>
+<style>
+  table { table-layout:fixed; word-break: break-all; word-wrap: break-word; }
+  table th,td { width:100px; }
+</style>
 总金额:{{ totalCost }}
 <hr />
+<button id="btn_confirmOrder" type="button" data-loading-text="正在提交订单" class="btn btn-primary" autocomplete="off">确认订单</button>
+
+<script>
+$('#btn_confirmOrder').on('click', function () {
+  var $btn = $(this).button('loading')
+  $.ajax({
+    type:'GET',
+    url:'/cart/confirm/',
+    success:function(data){
+      data = JSON.parse(data);
+      console.log(data['size']);
+      $('#cart_sz').text(data['size']);
+      alert('成功提交订单');
+    },
+  })
+  $btn.button('reset')
+})
+</script>
 {% endblock %}

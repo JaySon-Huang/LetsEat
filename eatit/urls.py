@@ -34,4 +34,5 @@ urlpatterns += patterns('customer.views',
     url(r'^cart/add/(?P<cuisineID>[^/]+)/$','add2Cart'),
     url(r'^cart/view/$','getCart'),
     url(r'^cart/clear/$','clearCart'),
+    url(r'^cart/confirm/$','confirmCart'),
 )
