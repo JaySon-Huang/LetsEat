@@ -25,11 +25,12 @@ class OrderModel(models.Model):
 		(3,'成功交易'),
 	)
 
-	time = models.DateTimeField(verbose_name='下单时间')
+	time = models.DateTimeField(verbose_name='下单时间',auto_now_add=True)
 	status = models.IntegerField(verbose_name='状态',choices=STATUS_OF_ORDER_CHOICES)
-	shop = models.ForeignKey(ShopModel,related_name = "order_shop",verbose_name='店铺')
-	cusine = models.ManyToManyField(CuisineModel,related_name = "order_cuisine",verbose_name='菜式')
-	customer = models.ForeignKey(CustomerModel,related_name = "order_customer",verbose_name='顾客')
+	shop = models.ForeignKey(ShopModel,related_name="order_shop",verbose_name='店铺')
+	# FIXME: 应该为cuisine
+	cusine = models.ManyToManyField(CuisineModel,related_name="order_cuisine",verbose_name='菜式')
+	customer = models.ForeignKey(CustomerModel,related_name="order_customer",verbose_name='顾客')
 	
 	def __unicode__(self):
 		return unicode(self.id)
@@ -47,8 +48,8 @@ class CommentModel(models.Model):
 		(5.0,'5.0'),
 	)
 
-	customer = models.OneToOneField(CustomerModel,related_name = "comment_customer",verbose_name='顾客')
-	cuisine = models.OneToOneField(CuisineModel,related_name = "comment_cuisine",verbose_name='菜式')
+	customer = models.OneToOneField(CustomerModel,related_name="comment_customer",verbose_name='顾客')
+	cuisine = models.OneToOneField(CuisineModel,related_name="comment_cuisine",verbose_name='菜式')
 	grade = models.FloatField(verbose_name='评分',choices=GRADE_OF_CUISINE_CHOICES,default=3.0)
 	message = models.CharField(verbose_name='留言',max_length=200,default='我的最爱')
 
