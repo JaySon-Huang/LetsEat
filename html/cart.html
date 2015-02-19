@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}个人信息 - 饱了么{% endblock %}
+
+{% block body %}
+<h2>购物车:</h2>
+<br />
+{% for cuisine in cuisines %}
+  {% for cusine,num in order.cusines %}
+    {{cusine.name}}x{{num}} -- {{cusine.price}}元
+    <br />
+  {% endfor %}
+{% endfor %}
+总金额:{{ totalCost }}
+<hr />
+{% endblock %}

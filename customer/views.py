@@ -123,14 +123,14 @@ def profile(request):
 			'status':order2str['status'][order.status],
 			'time':order.time,
 			'shop':order.shop,
-			'cusines':[],
+			'cuisines':[],
 		}
-		for cusine in order.cusine.all():
-			cusineinfo = {
-				'name':cusine.name,
-				'price':cusine.price,
+		for cuisine in order.cuisine.all():
+			cuisineinfo = {
+				'name':cuisine.name,
+				'price':cuisine.price,
 			}
-			orderinfo['cusines'].append(cusineinfo)
+			orderinfo['cuisines'].append(cuisineinfo)
 		userinfo['orders'].append(orderinfo)
 	#仅debug
 	# user = {
@@ -180,7 +180,22 @@ def add2Cart(request, cuisineID):
 	return HttpResponse(json.dumps(res))
 
 def getCart(request):
-	return HttpResponse(json.dumps(request.session['cart'].items))
+	totalCost = 0.0
+	cuisines = []
+	for cuisineID, num in request.session['cart'].items.items():
+		cuisine = CuisineModel.objects.get(id=cuisineID)
+		totalCost += cuisine.price
+		cuisines.append((cuisine, num))
+	print 
+	return render_to_response(
+		'cart.html',
+		{
+		'totalCost':totalCost,
+		'cuisines':cuisines,
+		},
+		context_instance=RequestContext(request)
+	)
+	# return HttpResponse(json.dumps(request.session['cart'].items))
 
 def clearCart(request):
 	request.session['cart'] = Cart()
