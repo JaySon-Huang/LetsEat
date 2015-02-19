@@ -1,3 +1,7 @@
+body {
+	padding: 0 0 50px 0;
+}
+
 #shop {
 	float: right;
 	height: 125px;

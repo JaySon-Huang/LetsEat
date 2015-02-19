@@ -5,6 +5,31 @@
 
 {% block body %}
 <script>
+meta_cuisines = {{ cuisines|safe }};
+template = '<div class="col-xs-6 col-lg-4 shop"><div class="thumbnails shop_icon"><img class="img-polaroid" src="{% static "pictures/picture.jpeg" %}" alt="店铺名称" /></div><div class="shop_desc"><h4><a id="{0}" class="add_cuisine" onclick="add2cart(this);">{1}</a></h4><p>价格: {2} 元</p><p>评分: {3}&nbsp;&nbsp;&nbsp;销量: {4} 份</p></div></div><!-- 一份菜式 -->';
+function sort_by_sale(lval, rval){
+  return rval['sale'] - lval['sale'];
+}
+function sort_by_price(lval, rval){
+  return rval['price'] - lval['price'];
+}
+function sort_by_rank(lval, rval){
+  return rval['grade'] - lval['grade'];
+}
+function cuisines2html () {
+  content = "";
+  for(i=0;i!=meta_cuisines.length;++i){
+    content += String.format(
+      template,
+      meta_cuisines[i]['id'],
+      meta_cuisines[i]['name'],
+      meta_cuisines[i]['price'],
+      meta_cuisines[i]['grade'],
+      meta_cuisines[i]['sale']
+    );
+  }
+  $('#div_cuisines').html(content);
+}
 function add2cart(elem){
   $.ajax({
     type:'GET',
@@ -16,6 +41,10 @@ function add2cart(elem){
     },
   })
 }
+$(document).ready(function(){
+  meta_cuisines.sort(sort_by_sale);
+  cuisines2html();
+});
 </script>
 
 <div class="row row-offcanvas row-offcanvas-right">
@@ -28,19 +57,35 @@ function add2cart(elem){
       <h4>地址:{{shop.address}}</h4>
       <h4>起送价:{{shop.miniprice}} 元</h4>
     </div>
-    <div class="row">
-{% for cuisine in cuisines %}
-<div class="col-xs-6 col-lg-4 shop">
-  <div class="thumbnails shop_icon">
-    <img class="img-polaroid" src="{% static 'pictures/picture.jpeg' %}" alt="店铺名称" />
-  </div>
-  <div class="shop_desc">
-    <h4><a id='{{cuisine.id}}' class='add_cuisine' onclick='add2cart(this);'>{{cuisine.name}}</a></h4>
-    <p>价格: {{cuisine.price}} 元</p>
-    <p>评分: {{cuisine.grade}}&nbsp;&nbsp;&nbsp;销量: {{cuisine.salesvolume}} 份</p>
-  </div>
-</div><!-- 一份菜式 -->
-{% endfor %}
+按照
+<div id="view_by" class="btn-group" data-toggle="buttons">
+  <label id="opt_sale" class="btn btn-primary active">
+    <input type="radio" name="options" autocomplete="off" checked>销量
+  </label>
+  <label id="opt_price" class="btn btn-primary">
+    <input type="radio" name="options" autocomplete="off">价格
+  </label>
+  <label id="opt_grade" class="btn btn-primary">
+    <input type="radio" name="options" autocomplete="off">评价
+  </label>
+</div>
+排序
+<script>
+$("#opt_sale").click(function(){
+  meta_cuisines.sort(sort_by_sale);
+  cuisines2html();
+})
+$("#opt_price").click(function(){
+  meta_cuisines.sort(sort_by_price);
+  cuisines2html();
+})
+$("#opt_grade").click(function(){
+  meta_cuisines.sort(sort_by_rank);
+  cuisines2html();
+})
+</script>
+<br/><hr/>
+    <div id="div_cuisines" class="row">
     </div><!--/row-->
   </div><!--/.col-xs-12.col-sm-9-->
 </div><!--/row-->

@@ -23,6 +23,8 @@ def signup(request):
 			phone = signupform.cleaned_data['phone']
 			ex_phone = signupform.cleaned_data['ex_phone']
 
+			# FIXME: 假如数据库中已经有相同的account，应报错让用户重新输入
+
 			# 创建数据库对象,写入数据库
 			newuser = CustomerModel(
 				account=account,
@@ -114,6 +116,7 @@ def profile(request):
 			'shop':order.shop,
 			'cuisines':[],
 		}
+		print order.cuisine.all()
 		for cuisine in order.cuisine.all():
 			cuisineinfo = {
 				'name':cuisine.name,
@@ -121,6 +124,7 @@ def profile(request):
 			}
 			orderinfo['cuisines'].append(cuisineinfo)
 		userinfo['orders'].append(orderinfo)
+		print userinfo['orders'][0]
 	return render_to_response(
 		'customer/profile.html',
 		{

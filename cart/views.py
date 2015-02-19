@@ -53,12 +53,14 @@ def confirmCart(request):
         if not shop:
             shop = cuisine.shop
         else:
-            if not shop == cuisine.id:
+            print shop, cuisine.shop
+            if not shop.id == cuisine.shop.id:
                 is_valid_order = False
                 break
         # 把点餐的信息先存储到cuisines中
         cuisines.append( (cuisine,num) )
     if not is_valid_order:
+        length = request.session['cart'].size
         return HttpResponse(json.dumps({'size':length,'error':'所点的餐来自不同餐厅!'}))
     order.shop = shop
     order.customer = user
@@ -66,8 +68,9 @@ def confirmCart(request):
     order.save()
     
     # 进行order与cuisine多对多的绑定
+    print dir(order)
     for i in xrange(num):
-        order.cusine.add(cuisine)
+        order.cuisine.add(cuisine)
     order.save()
 
     # 把购物车清空

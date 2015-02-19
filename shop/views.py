@@ -3,6 +3,8 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 
+import json
+
 from shop.models import ShopModel
 
 def index(request):
@@ -41,12 +43,22 @@ def viewShop(request, shopid):
 
     cuisines = shop.cuisine_shop.all()
 
+    json_cuisines = []
+    for cuisine in cuisines:
+        json_cuisines.append({
+            'id':cuisine.id,
+            'name':cuisine.name,
+            'price':cuisine.price,
+            'grade':cuisine.grade,
+            'sale':cuisine.salesvolume,
+        })
+
     return render_to_response(
         'shop.html',
         {
             'session' : request.session,
             'shop':shop,
-            'cuisines':cuisines,
+            'cuisines':json.dumps(json_cuisines),
         },
         context_instance=RequestContext(request)
     )
