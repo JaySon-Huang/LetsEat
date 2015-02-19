@@ -41,12 +41,12 @@ body {
 	background: url(images/img03.gif) no-repeat center top;
 }
 .shop {
-	background: #22eecc;
+	background: #edc;
+	border: 1px solid #000;
 }
 .shop_icon {
 	float: left;
 }
 .shop_desc {
 	float :left;
-	background: #eecc22;
 }

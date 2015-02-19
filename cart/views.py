@@ -12,6 +12,7 @@ from customer.models import CustomerModel, OrderModel
 from models import Cart
 
 def add2Cart(request, cuisineID):
+    # FIXME: 如果餐厅在“打烊”状态，应该无法添加到购物车,返回错误
     cart = request.session.get('cart', None)
     if cart is None:
         cart = Cart()
