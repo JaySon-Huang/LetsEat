@@ -30,7 +30,7 @@ urlpatterns += patterns('customer.views',
     url(r'^customer/profile/$','profile'),
 )
 
-urlpatterns += patterns('customer.views',
+urlpatterns += patterns('cart.views',
     url(r'^cart/add/(?P<cuisineID>[^/]+)/$','add2Cart'),
     url(r'^cart/view/$','getCart'),
     url(r'^cart/clear/$','clearCart'),
