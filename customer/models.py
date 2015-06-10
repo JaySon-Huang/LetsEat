@@ -15,6 +15,9 @@ class CustomerModel(models.Model):
 	def __unicode__(self):
 		return self.name
 
+	def __str__(self):
+		return self.name
+
 class OrderModel(models.Model):
 	'''订单'''
 
@@ -32,6 +35,9 @@ class OrderModel(models.Model):
 	customer = models.ForeignKey(CustomerModel,related_name="order_customer",verbose_name='顾客')
 	
 	def __unicode__(self):
+		return unicode(self.id)
+
+	def __str__(self):
 		return unicode(self.id)
 
 class CommentModel(models.Model):
@@ -53,4 +59,7 @@ class CommentModel(models.Model):
 	message = models.CharField(verbose_name='留言',max_length=200,default='我的最爱')
 
 	def __unicode__(self):
+		return '%s:%f'%(self.cuisine.__unicode__(),self.grade)
+
+	def __str__(self):
 		return '%s:%f'%(self.cuisine.__unicode__(),self.grade)

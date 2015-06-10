@@ -9,7 +9,7 @@ from django.http import HttpResponse
 from shop.models import CuisineModel
 from customer.models import CustomerModel, OrderModel
 
-from models import Cart
+from .models import Cart
 
 def add2Cart(request, cuisineID):
     # FIXME: 如果餐厅在“打烊”状态，应该无法添加到购物车,返回错误
@@ -54,7 +54,7 @@ def confirmCart(request):
         if not shop:
             shop = cuisine.shop
         else:
-            print shop, cuisine.shop
+            # print(shop, cuisine.shop)
             if not shop.id == cuisine.shop.id:
                 is_valid_order = False
                 break
@@ -69,7 +69,7 @@ def confirmCart(request):
     order.save()
     
     # 进行order与cuisine多对多的绑定
-    print dir(order)
+    print(dir(order))
     for i in xrange(num):
         order.cuisine.add(cuisine)
     order.save()

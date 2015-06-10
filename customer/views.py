@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect
 
 from customer.models import CustomerModel, OrderModel
 
-from forms import SignupForm, LoginForm
+from .forms import SignupForm, LoginForm
 
 def signup(request):
 	'''注册动作'''
@@ -116,7 +116,7 @@ def profile(request):
 			'shop':order.shop,
 			'cuisines':[],
 		}
-		print order.cuisine.all()
+		print(order.cuisine.all())
 		for cuisine in order.cuisine.all():
 			cuisineinfo = {
 				'name':cuisine.name,
@@ -124,7 +124,7 @@ def profile(request):
 			}
 			orderinfo['cuisines'].append(cuisineinfo)
 		userinfo['orders'].append(orderinfo)
-		print userinfo['orders'][0]
+		print(userinfo['orders'][0])
 	return render_to_response(
 		'customer/profile.html',
 		{

@@ -27,6 +27,9 @@ class ShopModel(models.Model):
 	def __unicode__(self):
 		return u'店铺:'+self.name
 
+	def __str__(self):
+		return u'店铺:'+self.name
+
 class ShopKeeperModel(models.Model):
 	'''店长'''
 	name = models.CharField(verbose_name='姓名',max_length=20)
@@ -36,6 +39,9 @@ class ShopKeeperModel(models.Model):
 	shop = models.OneToOneField(ShopModel,related_name = "shop_shopkeeper",verbose_name='店铺')
 
 	def __unicode__(self):
+		return u'店长:'+self.name
+
+	def __str__(self):
 		return u'店长:'+self.name
 
 class CuisineModel(models.Model):
@@ -49,3 +55,5 @@ class CuisineModel(models.Model):
 	def __unicode__(self):
 		return u'菜式:'+self.name
 
+	def __str__(self):
+		return u'菜式:'+self.name

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from models import CustomerModel,OrderModel,CommentModel
+from .models import CustomerModel,OrderModel,CommentModel
 
 class CustomerModelAdmin(admin.ModelAdmin):
     list_display=('name','address','phone','alternatephone')
