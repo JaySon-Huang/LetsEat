@@ -35,10 +35,10 @@ class OrderModel(models.Model):
 	customer = models.ForeignKey(CustomerModel,related_name="order_customer",verbose_name='顾客')
 	
 	def __unicode__(self):
-		return unicode(self.id)
+		return u'{}'.format(self.id)
 
 	def __str__(self):
-		return unicode(self.id)
+		return u'{}'.format(self.id)
 
 class CommentModel(models.Model):
 	'''评论'''
