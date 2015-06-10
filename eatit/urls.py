@@ -24,15 +24,16 @@ urlpatterns += patterns('shop.views',
 
 # 处理顾客登录、修改个人资料等界面URL对应的view
 urlpatterns += patterns('customer.views',
-    url(r'^customer/signup/$','signup'),
-    url(r'^customer/login/$','login'),
-    url(r'^customer/logout/$','logout'),
-    url(r'^customer/profile/$','profile'),
+    url(r'^customer/signup/$', 'signup'),
+    url(r'^customer/login/$', 'login'),
+    url(r'^customer/logout/$', 'logout'),
+    url(r'^customer/profile/$', 'profile'),
 )
 
 urlpatterns += patterns('cart.views',
-    url(r'^cart/add/(?P<cuisineID>[^/]+)/$','add2Cart'),
-    url(r'^cart/view/$','getCart'),
-    url(r'^cart/clear/$','clearCart'),
-    url(r'^cart/confirm/$','confirmCart'),
+    url(r'^cart/add/(?P<cuisineID>[^/]+)/$', 'add2Cart'),
+    url(r'^cart/view/$', 'getCart'),
+    url(r'^cart/size/$', 'getCartSize'),
+    url(r'^cart/clear/$', 'clearCart'),
+    url(r'^cart/confirm/$', 'confirmCart'),
 )

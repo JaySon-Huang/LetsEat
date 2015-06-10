@@ -58,7 +58,7 @@ function clearCart(elem){
 <li><a href='/customer/login/'>登录</a></li>
 {% else %}
 <li class="dropdown">
-  <a href='#' class="dropdown-toggle" data-toggle="dropdown">购物车(<span id='cart_sz'>{{ session.cart.size }}</span>)<span class="caret"></span></a>
+  <a href='#' class="dropdown-toggle" data-toggle="dropdown">购物车(<span id='cart_sz'>{{ cart_size|default:0 }}</span>)<span class="caret"></span></a>
   <ul class="dropdown-menu" role="menu">
     <li><a href="/cart/view">订单详情</a></li>
     <li><a href="javascript:void(0);" onclick="clearCart(this)">清空购物车</a></li>
